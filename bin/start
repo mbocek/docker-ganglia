@@ -1,0 +1,43 @@
+#!/bin/bash
+set -e
+
+# By default, no debug info
+DEBUG_MODE=1
+# Default config file
+CONFIG_FILE=/etc/ganglia/gmetad.conf
+
+if [[ $DEFAULT_CONFIG_FILE ]]; then
+    CONFIG_FILE=$DEFAULT_CONFIG_FILE
+fi
+
+while true ; do
+  case "$1" in
+
+    --config)
+      shift
+      CONFIG_FILE=$1
+      shift
+      ;;
+
+    --debug)
+      shift
+      DEBUG_MODE=$1
+      shift
+      ;;
+
+    "")
+      break
+      ;;
+
+  esac
+done
+
+# Avoid: "Please make sure that /var/lib/ganglia/rrds is owned by nobody"
+chown -R nobody /var/lib/ganglia/rrds
+
+service apache2 restart
+
+echo "Using configuration file: $CONFIG_FILE"
+
+# Start gmetad service on foreground
+gmetad -d $DEBUG_MODE -p /var/run/gmetad.pid -c $CONFIG_FILE
