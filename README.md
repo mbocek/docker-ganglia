@@ -20,3 +20,4 @@ Content can looks like:
 ```Shell
 data_source "my cluster" 50 localhost:8649
 ```
+
