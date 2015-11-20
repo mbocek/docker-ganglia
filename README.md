@@ -20,4 +20,7 @@ Content can looks like:
 ```Shell
 data_source "my cluster" 50 localhost:8649
 ```
-
+Also don't forget to cretae directory in volume:
+```Shell
+mkdir -p /var/lib/ganglia/rrds
+```
