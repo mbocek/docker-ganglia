@@ -11,10 +11,10 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     a2ensite 000-ganglia
 
 # Add the start script
-ADD bin/entry entry
+ADD bin/start start
 
 # entrypoint is the start script
-ENTRYPOINT ["bash", "entry"]
+ENTRYPOINT ["bash", "start"]
 
 # Default
 CMD []
