@@ -34,13 +34,13 @@ done
 
 # create default gmetad.conf file
 echo "Creating gmetad.conf"
-if [ ! -f "/etc/ganglia/gmetad.conf" ] then
+if [ ! -f "/etc/ganglia/gmetad.conf" ]; then
     echo 'data_source "my cluster" 50 localhost:8649' > /etc/ganglia/gmetad.conf
 fi
 
 # create rrds direcotry
 echo "Creating rrds directory"
-if [ ! -d "/var/lib/ganglia/rrds" ] then
+if [ ! -d "/var/lib/ganglia/rrds" ]; then
     mkdir -p /var/lib/ganglia/rrds
 fi
 
