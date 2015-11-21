@@ -12,6 +12,7 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
 
 # Add the start script
 ADD bin/start start
+ADD conf/gmond.conf /tmp/gmond.conf
 
 # entrypoint is the start script
 ENTRYPOINT ["bash", "start"]

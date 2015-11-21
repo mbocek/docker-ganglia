@@ -36,7 +36,14 @@ done
 echo "Checking gmetad.conf"
 if [ ! -f "/etc/ganglia/gmetad.conf" ]; then
     echo 'data_source "my cluster" 50 localhost:8649' > /etc/ganglia/gmetad.conf
-    echo "gmetad.conf created"
+    echo "Default gmetad.conf created"
+fi
+
+# create default gmond.conf direcotry
+echo "Checking gmond.conf"
+if [ ! -f "/etc/ganglia/gmond.conf" ]; then
+    cp /tmp/gmond.conf /etc/ganglia/gmond.conf
+    echo "Default gmond.conf created"
 fi
 
 # create rrds direcotry
@@ -45,6 +52,8 @@ if [ ! -d "/var/lib/ganglia/rrds" ]; then
     mkdir -p /var/lib/ganglia/rrds
     echo "directory created"
 fi
+
+
 
 # Avoid: "Please make sure that /var/lib/ganglia/rrds is owned by nobody"
 echo "Changing ownership on rrds directory"
