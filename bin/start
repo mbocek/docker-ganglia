@@ -33,18 +33,21 @@ while true ; do
 done
 
 # create default gmetad.conf file
-echo "Creating gmetad.conf"
+echo "Checking gmetad.conf"
 if [ ! -f "/etc/ganglia/gmetad.conf" ]; then
     echo 'data_source "my cluster" 50 localhost:8649' > /etc/ganglia/gmetad.conf
+    echo "gmetad.conf created"
 fi
 
 # create rrds direcotry
-echo "Creating rrds directory"
+echo "Checking rrds directory"
 if [ ! -d "/var/lib/ganglia/rrds" ]; then
     mkdir -p /var/lib/ganglia/rrds
+    echo "directory created"
 fi
 
 # Avoid: "Please make sure that /var/lib/ganglia/rrds is owned by nobody"
+echo "Changing ownership on rrds directory"
 chown -R nobody /var/lib/ganglia/rrds
 
 service apache2 restart
