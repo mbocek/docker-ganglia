@@ -24,7 +24,11 @@ while true ; do
       DEBUG_MODE=$1
       shift
       ;;
-
+    --timezone)
+      shift
+      TIMEZONE=$1
+      shift
+      ;;
     "")
       break
       ;;
@@ -53,7 +57,11 @@ if [ ! -d "/var/lib/ganglia/rrds" ]; then
     echo "directory created"
 fi
 
-
+# apply timezone if set
+if [ -n $TIMEZONE ]; then 
+    ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+    echo "Setting timezone: " + $TIMEZONE
+fi
 
 # Avoid: "Please make sure that /var/lib/ganglia/rrds is owned by nobody"
 echo "Changing ownership on rrds directory"
